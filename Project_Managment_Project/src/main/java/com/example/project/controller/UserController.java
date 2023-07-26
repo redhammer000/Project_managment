@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -60,7 +61,7 @@ public class UserController {
 	}
 	
 	
-	@PutMapping(path = "update/{userid}")
+	@PatchMapping(path = "update/{userid}")
 	
 	public void updateUser(
 			@PathVariable ("userid") Long userId,
@@ -80,7 +81,7 @@ public class UserController {
 		
 	}
 	
-	@PutMapping(path = "adm_update/{userid}")
+	@PatchMapping(path = "adm_update/{userid}")
 	public void adm_updateUser(
 			@PathVariable ("userid") Long userId,
 			@RequestParam (required = false) String firstName,

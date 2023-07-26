@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -80,7 +81,7 @@ public class TeamMembersController {
 		
 	}
 	
-	@PutMapping(path = "update_team/{teamid}")
+	@PatchMapping(path = "update_team/{teamid}")
 	public void updateTeam(
 			@PathVariable ("teamid") Long teamid,
 			@RequestParam (required = false) String TeamName,
@@ -94,7 +95,7 @@ public class TeamMembersController {
 	}
 	
 	
-	@PutMapping(path = "update_member/{memberid}")
+	@PatchMapping(path = "update_member/{memberid}")
 	public void updatemember(
 			@PathVariable ("memberid") Long memberid,
 			@RequestParam (required = false) Date JoiningDate,
