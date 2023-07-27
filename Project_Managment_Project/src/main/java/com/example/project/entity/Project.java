@@ -1,11 +1,10 @@
 package com.example.project.entity;
 
-
 import java.sql.Date;
 
-
-
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -16,6 +15,8 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table
+
+@EntityListeners(AuditingEntityListener.class)
 public class Project {
 
 	@Id
