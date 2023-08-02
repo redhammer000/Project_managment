@@ -37,7 +37,6 @@ public class Members {
 	
 	
 	private Date JoiningDate;
-	private String Role;
 		
 	private Boolean IsTeamLead;
 
@@ -51,14 +50,12 @@ public class Members {
 
 
 
-	public Members(Long memberId, Date joiningDate, String role, Boolean isTeamLead, Tasks task, User userMember,
+	public Members(Long memberId, Date joiningDate, String role, Boolean isTeamLead, User userMember,
 			Teams teamMembers) {
 		super();
 		MemberId = memberId;
 		JoiningDate = joiningDate;
-		Role = role;
 		IsTeamLead = isTeamLead;
-		Task = task;
 		UserMember = userMember;
 		TeamMembers = teamMembers;
 	}
@@ -89,18 +86,6 @@ public class Members {
 
 
 
-	public String getRole() {
-		return Role;
-	}
-
-
-
-	public void setRole(String role) {
-		Role = role;
-	}
-
-
-
 	public Boolean getIsTeamLead() {
 		return IsTeamLead;
 	}
@@ -109,18 +94,6 @@ public class Members {
 
 	public void setIsTeamLead(Boolean isTeamLead) {
 		IsTeamLead = isTeamLead;
-	}
-
-
-
-	public Tasks getTask() {
-		return Task;
-	}
-
-
-
-	public void setTask(Tasks task) {
-		Task = task;
 	}
 
 
@@ -149,9 +122,6 @@ public class Members {
 
 
 
-	@OneToOne(targetEntity = Tasks.class)
-	@JoinColumn(name = "TaskId" , referencedColumnName = "TaskId")
-    private Tasks Task;
 	
 	@OneToOne(targetEntity = User.class)
 	@JoinColumn(name = "UserId" , referencedColumnName = "UserId")

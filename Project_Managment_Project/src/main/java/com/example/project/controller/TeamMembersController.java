@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -99,15 +98,13 @@ public class TeamMembersController {
 	public void updatemember(
 			@PathVariable ("memberid") Long memberid,
 			@RequestParam (required = false) Date JoiningDate,
-			@RequestParam (required = false) String Role,
 			@RequestParam (required = false) Boolean isTeamLead,
-			@RequestParam (required = false) Tasks task,
 			@RequestParam (required = false) User userMember,
 			@RequestParam (required = false) Teams teamMembers
 			)	 
 	{
 		
-		membersServ.updatemember(memberid,JoiningDate,Role,isTeamLead,task,userMember,teamMembers);
+		membersServ.updatemember(memberid,JoiningDate,isTeamLead,userMember,teamMembers);
 		
 	}
 	
