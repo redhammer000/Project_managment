@@ -7,6 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
@@ -46,17 +47,27 @@ public class Sprints {
 
 
 
-	public Sprints(Long sprintId, String name, Date startDate, Date endDate, Project projectSprints) {
+	public Sprints(String sprints_name, Date startDate, Date endDate, Long project_id) {
 		super();
-		SprintId = sprintId;
-		Name = name;
+		Name = sprints_name;
 		StartDate = startDate;
 		EndDate = endDate;
-		ProjectSprints = projectSprints;
+		
+		Project proj = new Project();
+		
+		proj.setprojectId(project_id);
+		ProjectSprints = proj;
 	}
 
-
-
+	
+	public void setproject_id(Long project_id)
+	{
+		Project proj = new Project();
+		
+		proj.setprojectId(project_id);
+		ProjectSprints = proj;
+	}
+	
 
 	public Long getSprintId() {
 		return SprintId;
@@ -72,14 +83,18 @@ public class Sprints {
 
 
 
-	public String getName() {
+
+
+
+
+	public String getsprints_name() {
 		return Name;
 	}
 
 
 
 
-	public void setName(String name) {
+	public void setsprints_name(String name) {
 		Name = name;
 	}
 
@@ -126,9 +141,12 @@ public class Sprints {
 	}
 
 
+	public Long getproject_id()
+	{
+		return ProjectSprints.getprojectId();
+	}
 
-
-	@OneToOne(targetEntity = Project.class)
+	@ManyToOne(targetEntity = Project.class)
 	@JoinColumn(name = "ProjectId" , referencedColumnName = "projectId")
     private Project ProjectSprints;
 	

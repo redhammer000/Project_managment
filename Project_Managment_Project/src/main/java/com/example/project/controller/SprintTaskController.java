@@ -1,6 +1,7 @@
 package com.example.project.controller;
 
 import java.sql.Date;
+
 import java.util.List;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -54,11 +55,37 @@ public class SprintTaskController {
 		
 	}
 	
+	
+	@GetMapping("gettask")
+	public List<Tasks> gettasks()
+	{
+		
+		return TaskServe.getMytasks();
+		
+	}
+	
+	
+	@GetMapping("get_My_task")
+	public Tasks get_My_tasks(@RequestParam (required = true) Long taskId)
+	{
+		
+		return TaskServe.gettasks(taskId);
+		
+	}
+	
 	@GetMapping("get_Tasks_by_Sprint")
-	public List<Object[]> getTasksBySprints(@RequestParam (required = true) Long Sprintid)
+	public List<Tasks> getTasksBySprints(@RequestParam (required = true) Long Sprintid)
 	{
 		
 		return TaskServe.getTasksBySprint(Sprintid);
+		
+	}
+	
+	@GetMapping("get_Sprints_by_Projects")
+	public List<Sprints> getSprintsByProjects(@RequestParam (required = true) Long project_id)
+	{
+		
+		return SprintServ.getSprintsByProjects(project_id);
 		
 	}
 	
@@ -95,19 +122,21 @@ public class SprintTaskController {
 	
 	}
 	
-	@PatchMapping(path = "update_Sprint/{sprintid}")
+	@PatchMapping(path = "update_Sprint/{id}")
 	
 	public void updatesprint(
-			@PathVariable ("sprintid") Long sprintid,
-			@RequestParam (required = false) String name,
-			@RequestParam (required = false) Date startDate,
-			@RequestParam (required = false) Date endDate,
-			@RequestParam (required = false) Project projectSprints
-			)	 
-	{
+	        @PathVariable("id") Long sprintid,
+	        @RequestBody Sprints sprint
+	) {
 		
-	SprintServ.updateSprint(sprintid,name,startDate,endDate,projectSprints);
-		
+	String sprints_name	= sprint.getsprints_name();
+	Date startDate = sprint.getStartDate();
+	Date endDate = sprint.getEndDate();
+	Long project_id = sprint.getproject_id();
+	
+	
+	        SprintServ.updateSprint(sprintid, sprints_name, startDate, endDate, project_id);
+
 	}
 	
 	
@@ -115,16 +144,20 @@ public class SprintTaskController {
 	
 	public void updatetask(
 			@PathVariable ("taskid") Long taskid,
-			@RequestParam (required = false) String taskTitle,
-			@RequestParam (required = false)  String taskDiscription,
-			@RequestParam (required = false) Date startDate,
-			@RequestParam (required = false) Date endDate,
-			@RequestParam (required = false) String taskStatus,
-			@RequestParam (required = false) Sprints sprintTasks
+			@RequestBody Tasks task
 			)	 
 	{
 		
-		TaskServe.updateTask(taskid,taskTitle,taskDiscription,startDate,endDate,taskStatus,sprintTasks);
+		
+		String taskTitle = task.gettask_title();
+		String taskDiscription = task.gettask_description();
+		Date startDate = task.getstartDate();
+		Date endDate = task.getendDate();
+		String taskStatus = task.gettaskStatus();
+		Long sprint_id = task.getsprint_id();
+		
+		
+		TaskServe.updateTask(taskid,taskTitle,taskDiscription,startDate,endDate,taskStatus,sprint_id);
 		
 	}
 	

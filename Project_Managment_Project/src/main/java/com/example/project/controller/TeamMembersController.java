@@ -2,6 +2,7 @@ package com.example.project.controller;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,6 +51,14 @@ public class TeamMembersController {
 	}
 	
 	
+	@GetMapping("Get_proj_team")
+	public List<Teams> getMyprojTeam(@RequestParam (required = true) Long project_id)
+	{
+		return TeamServ.get_My_team_details_for_the_project(project_id);
+		
+	}
+	
+	
 	@GetMapping("Get_members")
 	public List<Members> getMembers()
 	{
@@ -67,7 +76,7 @@ public class TeamMembersController {
 	
 	
 	@PostMapping("register_team")
-	public void Register_team( @RequestBody Teams team) {
+	public void Register_team(@RequestBody Teams team) {
 		
 		TeamServ.Register_team(team);
 		
@@ -83,13 +92,14 @@ public class TeamMembersController {
 	@PatchMapping(path = "update_team/{teamid}")
 	public void updateTeam(
 			@PathVariable ("teamid") Long teamid,
-			@RequestParam (required = false) String TeamName,
-			@RequestParam (required = false) String TeamDiscription,
-			@RequestParam (required = false) Project projTeam
+			@RequestBody Teams team
 			)	 
 	{
 		
-		TeamServ.updateTeam(teamid,TeamName,TeamDiscription,projTeam);
+		String TeamName = team.getteam_name() ;
+		String TeamDiscription = team.getteam_description();  
+		Long projectid = team.getproject_id(); 
+		TeamServ.updateTeam(teamid,TeamName,TeamDiscription,projectid);
 		
 	}
 	

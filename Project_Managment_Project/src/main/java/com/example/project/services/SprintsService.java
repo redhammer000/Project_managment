@@ -40,7 +40,7 @@ public class SprintsService {
 
 	public void Register_Sprint(Sprints sprint) {
 		
-		sprint.setProjectSprints(projRepo.findById(sprint.getProjectSprints().getProjectId()).orElseThrow(() -> new IllegalStateException("project with id " + sprint.getProjectSprints().getProjectId() + " does not exist")));
+		sprint.setProjectSprints(projRepo.findById(sprint.getProjectSprints().getprojectId()).orElseThrow(() -> new IllegalStateException("project with id " + sprint.getProjectSprints().getprojectId() + " does not exist")));
 		
 		SprintRepo.save(sprint);
 	
@@ -59,29 +59,38 @@ public class SprintsService {
 	
 	
 	@Transactional
-	public void updateSprint(Long sprintid, String name, Date startDate, Date endDate, Project projectSprints) {
+	public void updateSprint(Long sprintid, String name, Date startDate, Date endDate, Long project_id) {
 		
 		Sprints sprint = SprintRepo.findById(sprintid).orElseThrow(() -> new IllegalStateException("sprint with id " + sprintid + " does not exist"));
 		
-		
-		
-		if(projectSprints != null)
-		if (projectSprints.getProjectId() != sprint.getProjectSprints().getProjectId())
+		if (project_id != null)
 		{
-			sprint.setProjectSprints(projRepo.findById(projectSprints.getProjectId()).orElseThrow(() -> new IllegalStateException("Project with id " + projectSprints.getProjectId() + " does not exist")));
+			Project projectSprints = projRepo.findById(project_id).get();
+		
+			if(projectSprints != null)
+				if (projectSprints.getprojectId() != sprint.getProjectSprints().getprojectId())
+					{
+						sprint.setProjectSprints(projRepo.findById(projectSprints.getprojectId()).orElseThrow(() -> new IllegalStateException("Project with id " + projectSprints.getprojectId() + " does not exist")));
+					}
+		
 		}
-		
-		
 		
 		
 
 		if (name != null)
-			sprint.setName(name);
+			sprint.setsprints_name(name);
 		if (startDate != null)
 			sprint.setStartDate(startDate);
 		if (endDate != null)
 			sprint.setEndDate(endDate);
 
+		
+	}
+
+
+	public List<Sprints> getSprintsByProjects(Long projectId) {
+		
+		return SprintRepo.findByProjectSprintsProjectId(projectId);
 		
 	}
 

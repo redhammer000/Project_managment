@@ -53,23 +53,42 @@ public class Tasks {
 
 
 
-	public Tasks(Long taskId, String taskTitle, String taskDiscription, Date startDate, Date endDate, String taskStatus,
-			Sprints sprintTasks) {
+	public Tasks(Long taskId, String task_title, String task_description, Date startDate, Date endDate, String taskStatus,
+			Long sprint_id) {
 		super();
-		TaskId = taskId;
-		TaskTitle = taskTitle;
-		TaskDiscription = taskDiscription;
+		TaskTitle = task_title;
+		TaskDiscription = task_description;
 		StartDate = startDate;
 		EndDate = endDate;
 		TaskStatus = taskStatus;
-		sprinttasks = sprintTasks;
+		
+		Sprints sprint = new Sprints();
+		
+		sprint.setSprintId(sprint_id);
+		sprinttasks = sprint;
 	}
 
 
+	
+	public void setsprint_id(Long sprint_id)
+	{
+		
+		
+		Sprints sprint = new Sprints();
+		
+		sprint.setSprintId(sprint_id);
+		sprinttasks = sprint;
+		
+	}
+	
+	public Long getsprint_id()
+	{
+		
+		return sprinttasks.getSprintId();
+		
+	}
 
-
-
-	public Long getTaskId() {
+	public Long gettaskId() {
 		return TaskId;
 	}
 
@@ -77,7 +96,7 @@ public class Tasks {
 
 
 
-	public void setTaskId(Long taskId) {
+	public void settaskId(Long taskId) {
 		TaskId = taskId;
 	}
 
@@ -85,7 +104,7 @@ public class Tasks {
 
 
 
-	public String getTaskTitle() {
+	public String gettask_title() {
 		return TaskTitle;
 	}
 
@@ -93,7 +112,7 @@ public class Tasks {
 
 
 
-	public void setTaskTitle(String taskTitle) {
+	public void settask_title(String taskTitle) {
 		TaskTitle = taskTitle;
 	}
 
@@ -101,7 +120,7 @@ public class Tasks {
 
 
 
-	public String getTaskDiscription() {
+	public String gettask_description() {
 		return TaskDiscription;
 	}
 
@@ -109,7 +128,7 @@ public class Tasks {
 
 
 
-	public void setTaskDiscription(String taskDiscription) {
+	public void settask_description(String taskDiscription) {
 		TaskDiscription = taskDiscription;
 	}
 
@@ -117,7 +136,7 @@ public class Tasks {
 
 
 
-	public Date getStartDate() {
+	public Date getstartDate() {
 		return StartDate;
 	}
 
@@ -125,7 +144,7 @@ public class Tasks {
 
 
 
-	public void setStartDate(Date startDate) {
+	public void setstartDate(Date startDate) {
 		StartDate = startDate;
 	}
 
@@ -133,7 +152,7 @@ public class Tasks {
 
 
 
-	public Date getEndDate() {
+	public Date getendDate() {
 		return EndDate;
 	}
 
@@ -141,7 +160,7 @@ public class Tasks {
 
 
 
-	public void setEndDate(Date endDate) {
+	public void setendDate(Date endDate) {
 		EndDate = endDate;
 	}
 
@@ -149,7 +168,7 @@ public class Tasks {
 
 
 
-	public String getTaskStatus() {
+	public String gettaskStatus() {
 		return TaskStatus;
 	}
 
@@ -157,7 +176,7 @@ public class Tasks {
 
 
 
-	public void setTaskStatus(String taskStatus) {
+	public void settaskStatus(String taskStatus) {
 		TaskStatus = taskStatus;
 	}
 

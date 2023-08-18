@@ -48,7 +48,7 @@ public class UserService {
 
 	public void Register_user(User user) {
 		
-		user.setCompanyUser(comprepo.findById(user.getCompanyUser().getBranch_no()).orElseThrow(() -> new IllegalStateException("Branch with id " + user.getCompanyUser().getBranch_no() + " does not exist")));
+		user.setCompanyUser(comprepo.findById(user.getCompanyUser().getBranchNo()).orElseThrow(() -> new IllegalStateException("Branch with id " + user.getCompanyUser().getBranchNo() + " does not exist")));
 		UserRepo.save(user);
 	}
 
@@ -70,9 +70,9 @@ public class UserService {
 		User user = UserRepo.findById(userId).orElseThrow(() -> new IllegalStateException("user with id " + userId + " does not exist"));
 		
 		if(companyUser != null)
-		if (companyUser.getBranch_no() != user.getCompanyUser().getBranch_no())
+		if (companyUser.getBranchNo() != user.getCompanyUser().getBranchNo())
 		{
-			user.setCompanyUser(comprepo.findById(companyUser.getBranch_no()).orElseThrow(() -> new IllegalStateException("Branch with id " + companyUser.getBranch_no() + " does not exist")));
+			user.setCompanyUser(comprepo.findById(companyUser.getBranchNo()).orElseThrow(() -> new IllegalStateException("Branch with id " + companyUser.getBranchNo() + " does not exist")));
 		}
 		
 		
@@ -92,11 +92,11 @@ public class UserService {
 		
 			
 		if (firstName != null)
-		user.setFirstName(firstName);
+		user.setfirst_name(firstName);
 		if (lastName != null)
-		user.setLastName(lastName);
+		user.setlast_name(lastName);
 		if (gender != null)
-		user.setGender(gender);
+		user.setgender(gender);
 		if (position != null)
 		user.setPosition(position);
 		if (phoneNumber != null)

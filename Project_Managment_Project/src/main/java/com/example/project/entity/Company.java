@@ -1,14 +1,13 @@
 package com.example.project.entity;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.beans.factory.annotation.Autowired;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
@@ -43,42 +42,44 @@ public class Company {
 	}
 	
 	@Autowired
-	public Company(String branch_name, String branch_location, String branch_industry) {
-		this.BranchName = branch_name;
-		this.BranchLocation = branch_location;
-		this.BranchIndustry = branch_industry;
+	public Company(String branchIndustry, String branchLocation, String branchName) {
+		this.BranchName = branchName;
+		this.BranchLocation = branchLocation;
+		this.BranchIndustry = branchIndustry;
 	}
 
-	public Long getBranch_no() {
+
+
+	public Long getBranchNo() {
 		return BranchNo;
 	}
 
-	public void setBranch_no(Long branch_no) {
-		BranchNo = branch_no;
+	public void setBranchNo(Long branchNo) {
+		BranchNo = branchNo;
 	}
 
-	public String getBranch_name() {
+	public String getBranchName() {
 		return BranchName;
 	}
 
-	public void setBranch_name(String branch_name) {
-		BranchName = branch_name;
+	public void setBranchName(String branchName) {
+		BranchName = branchName;
 	}
 
-	public String getBranch_location() {
+	public String getBranchLocation() {
 		return BranchLocation;
 	}
 
-	public void setBranch_location(String branch_location) {
-		BranchLocation = branch_location;
+	public void setBranchLocation(String branchLocation) {
+		BranchLocation = branchLocation;
 	}
 
-	public String getBranch_industry() {
+	public String getBranchIndustry() {
 		return BranchIndustry;
 	}
 
-	public void setBranch_industry(String branch_industry) {
-		BranchIndustry = branch_industry;
+	public void setBranchIndustry(String branchIndustry) {
+		BranchIndustry = branchIndustry;
 	}
 
 	@Override

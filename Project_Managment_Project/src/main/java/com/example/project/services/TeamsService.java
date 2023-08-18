@@ -1,6 +1,7 @@
 package com.example.project.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -49,7 +50,7 @@ public class TeamsService {
 	
 	
 	public void Register_team(Teams team) {
-		team.setProjTeam((Projectrepo.findById(team.getProjTeam().getProjectId()).orElseThrow(() -> new IllegalStateException("Branch with id " + team.getProjTeam().getProjectId() + " does not exist"))));
+		team.setProjTeam((Projectrepo.findById(team.getProjTeam().getprojectId()).orElseThrow(() -> new IllegalStateException("Branch with id " + team.getProjTeam().getprojectId() + " does not exist"))));
 		
 		teamrepo.save(team);
 	}
@@ -59,21 +60,25 @@ public class TeamsService {
 
 
 	@Transactional
-	public void updateTeam(Long teamid,String teamName, String teamDiscription, Project projTeam) {
+	public void updateTeam(Long teamid,String teamName, String teamDiscription, Long project_id) {
 		
 		    Teams team = teamrepo.findById(teamid).orElseThrow(() -> new IllegalStateException("Team with id " + teamid + " does not exist"));
 		    
-		    if(projTeam != null)
-				if (projTeam.getProjectId() != team.getProjTeam().getProjectId())
-				{
-					team.setProjTeam(Projectrepo.findById(team.getProjTeam().getProjectId()).orElseThrow(() -> new IllegalStateException("Branch with id " + team.getProjTeam().getProjectId() + " does not exist")));
-				}
 		    
+		    if (project_id != null)
+		    {
+		    Project projTeam = Projectrepo.findById(project_id).get();
+		    if(projTeam != null)
+				if (projTeam.getprojectId() != team.getProjTeam().getprojectId())
+				{
+					team.setProjTeam(Projectrepo.findById(team.getProjTeam().getprojectId()).orElseThrow(() -> new IllegalStateException("Branch with id " + team.getProjTeam().getprojectId() + " does not exist")));
+				}
+		    }
 		    
 			if (teamName != null)
-				team.setTeamName(teamName);
+				team.setteam_name(teamName);
 			if (teamDiscription != null)
-				team.setTeamDiscription(teamDiscription);
+				team.setteam_description(teamDiscription);
 			
 	}
 
@@ -102,6 +107,18 @@ public class TeamsService {
 	{
 		Teams team = teamrepo.findById(teamid).orElseThrow(() -> new IllegalStateException("Team with id " + teamid + " does not exist"));
 		team.setMembersCount(team.decrementMembersCount());
+	}
+
+
+
+
+
+
+	public List<Teams> get_My_team_details_for_the_project(Long projId) {
+		List<Teams> team = teamrepo.findByProjectid(projId);
+		
+		return team;
+		
 	}
 
 	

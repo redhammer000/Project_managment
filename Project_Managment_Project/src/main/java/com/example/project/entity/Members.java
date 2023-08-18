@@ -50,18 +50,42 @@ public class Members {
 
 
 
-	public Members(Long memberId, Date joiningDate, String role, Boolean isTeamLead, User userMember,
-			Teams teamMembers) {
+	public Members(Long memberId, Date joiningDate, Boolean isTeamLead, Long user_id,
+			Long team_id) {
 		super();
 		MemberId = memberId;
 		JoiningDate = joiningDate;
 		IsTeamLead = isTeamLead;
-		UserMember = userMember;
-		TeamMembers = teamMembers;
+		
+		User user = new User();
+		
+		Teams team = new Teams();
+		
+		user.setUserId(user_id);
+		team.setTeamId(team_id);
+		
+		UserMember = user;
+		TeamMembers = team;
 	}
 
+	
+	public void setuser_id (Long user_id)
+	{
+		
+		User user = new User();
+		user.setUserId(user_id);
+		UserMember = user;
+	}
 
-
+	
+	public void setteam_id (Long team_id)
+	{
+		Teams team = new Teams();
+		team.setTeamId(team_id);
+		TeamMembers = team;
+	}
+	
+	
 	public Long getMemberId() {
 		return MemberId;
 	}

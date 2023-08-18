@@ -12,8 +12,8 @@ import com.example.project.entity.*;
 @Repository
 public interface TasksRepository extends JpaRepository<Tasks, Long> {
 	
-	@Query("SELECT TaskId, TaskTitle, TaskDiscription, TaskStatus " +
-	           "FROM Tasks  WHERE sprinttasks.SprintId = :sprintId")
-	    List<Object[]> findTaskInfoBysprinttasks(@Param("sprintId") Long sprintId);
+	@Query("SELECT tc " +
+	           "FROM Tasks tc  WHERE tc.sprinttasks.SprintId = :sprintId")
+	    List<Tasks> findTaskInfoBysprinttasks(@Param("sprintId") Long sprintId);
 
 }

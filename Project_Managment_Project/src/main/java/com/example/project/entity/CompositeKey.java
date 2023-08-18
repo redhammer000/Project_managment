@@ -20,10 +20,11 @@ public class CompositeKey implements Serializable{
 	}
 
 
-	public CompositeKey(Long memberId, Long taskId) {
+	public CompositeKey(Long member_id, Long task_id
+) {
 		super();
-		MemberId = memberId;
-		TaskId = taskId;
+		MemberId = member_id;
+		TaskId = task_id;
 	}
 	
 	
@@ -45,13 +46,13 @@ public class CompositeKey implements Serializable{
 	public Long getMemberId() {
 		return MemberId;
 	}
-	public void setMemberId(Long memberId) {
+	public void setmember_id(Long memberId) {
 		MemberId = memberId;
 	}
 	public Long getTaskId() {
 		return TaskId;
 	}
-	public void setTaskId(Long taskId) {
+	public void settask_id(Long taskId) {
 		TaskId = taskId;
 	}
 	 

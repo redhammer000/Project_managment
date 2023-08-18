@@ -58,7 +58,7 @@ public class ProjectService {
 	
 	public void Register_project(Project project) {
 		
-		project.setCompanyProject((comp_repo.findById(project.getCompanyProject().getBranch_no()).orElseThrow(() -> new IllegalStateException("Branch with id " + project.getCompanyProject().getBranch_no() + " does not exist"))));
+		project.setCompanyProject((comp_repo.findById(project.getCompanyProject().getBranchNo()).orElseThrow(() -> new IllegalStateException("Branch with id " + project.getCompanyProject().getBranchNo() + " does not exist"))));
 		Proj_repo.save(project);
 	}
 
@@ -81,21 +81,27 @@ public class ProjectService {
 	@Transactional
 	public void UpdateProject(Long projectid, String projectName, String projectStatus, Date projectStartDate,
 			Date projectEndDate, Long budget, String description, String client, String projectManager,
-			Company companyProject) {
-		
-		
+			Long Branchno) {
 		
 		
 		Project project = Proj_repo.findById(projectid).orElseThrow(() -> new IllegalStateException("project with id " + projectid + " does not exist"));
 		
+		if(Branchno != null)
+		{
+		Company companyProject = new Company();
+		companyProject.setBranchNo(Branchno);
+		
+		
+		
+		
 		if (companyProject != null)
-			if(project.getCompanyProject().getBranch_no() != companyProject.getBranch_no())
+			if(project.getCompanyProject().getBranchNo() != companyProject.getBranchNo())
 			{
-				auditLogService.set_audit_values("UPDATE", "SomeUser", projectid , "Project", "BranchId" , String.valueOf(companyProject.getBranch_no()) , String.valueOf(project.getCompanyProject().getBranch_no()));
-				project.setCompanyProject(comp_repo.findById(companyProject.getBranch_no()).orElseThrow(() -> new IllegalStateException("branch with id " + companyProject.getBranch_no() + " does not exist")));
+				auditLogService.set_audit_values("UPDATE", "SomeUser", projectid , "Project", "BranchId" , String.valueOf(companyProject.getBranchNo()) , String.valueOf(project.getCompanyProject().getBranchNo()));
+				project.setCompanyProject(comp_repo.findById(companyProject.getBranchNo()).orElseThrow(() -> new IllegalStateException("branch with id " + companyProject.getBranchNo() + " does not exist")));
 			}
 		
-		
+		}
 		
 		if (projectName != null)
 		{
@@ -111,14 +117,14 @@ public class ProjectService {
 		}
 		if (projectStartDate != null)
 		{
-			auditLogService.set_audit_values("UPDATE", "SomeUser", projectid , "Project", "ProjectStartDate" , String.valueOf(projectStartDate) , String.valueOf(project.getProjectStartDate()));
-			project.setProjectStartDate(projectStartDate);
+			auditLogService.set_audit_values("UPDATE", "SomeUser", projectid , "Project", "ProjectStartDate" , String.valueOf(projectStartDate) , String.valueOf(project.getstartDate()));
+			project.setstartDate(projectStartDate);
 		}
 		if (projectEndDate != null)
 		{
 			
-			auditLogService.set_audit_values("UPDATE", "SomeUser", projectid , "Project", "ProjectEndDate" , String.valueOf(projectEndDate) , String.valueOf(project.getProjectEndDate()));
-			project.setProjectEndDate(projectEndDate);
+			auditLogService.set_audit_values("UPDATE", "SomeUser", projectid , "Project", "ProjectEndDate" , String.valueOf(projectEndDate) , String.valueOf(project.getendDate()));
+			project.setendDate(projectEndDate);
 		}
 		if (budget != null)
 		{

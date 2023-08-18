@@ -62,32 +62,44 @@ public class Project {
 
 	
 	
-	public Project(Long projectId, String projectName, String projectStatus, Date projectStartDate, Date projectEndDate,
-			Long budget, String description, String client, String projectManager, Company companyProject) {
+	public Project(Long projectId, String projectName, String projectStatus, Date startDate, Date endDate,
+			Long budget, String description, String client, String projectManager, Long branchNumber ) {
 		super();
 		ProjectId = projectId;
 		ProjectName = projectName;
 		ProjectStatus = projectStatus;
-		ProjectStartDate = projectStartDate;
-		ProjectEndDate = projectEndDate;
+		ProjectStartDate = startDate;
+		ProjectEndDate = endDate;
 		Budget = budget;
 		Description = description;
 		this.client = client;
 		ProjectManager = projectManager;
-		CompanyProject = companyProject;
+		
+		Company comp = new Company();
+		comp.setBranchNo(branchNumber);
+		CompanyProject = comp;
+		
 	}
 
 
 
 
-	public Long getProjectId() {
+	public void setbranchNumber(Long branchNumber) {
+		Company comp = new Company();
+		comp.setBranchNo(branchNumber);
+		CompanyProject = comp;
+	}
+
+
+
+	public Long getprojectId() {
 		return ProjectId;
 	}
 
 
 
 
-	public void setProjectId(Long projectId) {
+	public void setprojectId(Long projectId) {
 		ProjectId = projectId;
 	}
 
@@ -122,28 +134,28 @@ public class Project {
 
 
 
-	public Date getProjectStartDate() {
+	public Date getstartDate() {
 		return ProjectStartDate;
 	}
 
 
 
 
-	public void setProjectStartDate(Date projectStartDate) {
+	public void setstartDate(Date projectStartDate) {
 		ProjectStartDate = projectStartDate;
 	}
 
 
 
 
-	public Date getProjectEndDate() {
+	public Date getendDate() {
 		return ProjectEndDate;
 	}
 
 
 
 
-	public void setProjectEndDate(Date projectEndDate) {
+	public void setendDate(Date projectEndDate) {
 		ProjectEndDate = projectEndDate;
 	}
 
@@ -217,8 +229,11 @@ public class Project {
 		CompanyProject = companyProject;
 	}
 
-
-
+	
+	public Company getbranchNumber() {
+		
+		return CompanyProject;
+	}
 
 	@ManyToOne(targetEntity = Company.class)
 	@JoinColumn(name = "BranchNo" , referencedColumnName = "BranchNo")

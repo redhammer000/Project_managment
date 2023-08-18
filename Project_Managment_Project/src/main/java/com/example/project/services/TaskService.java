@@ -30,11 +30,11 @@ public class TaskService {
 
 
 
-	public List<Object[]> getTasksBySprint(Long sprintid) {
+	public List<Tasks> getTasksBySprint(Long sprintid) {
 		
 	 Sprints sprint	 = SprintRepo.findById(sprintid).orElseThrow(() -> new IllegalStateException("Sprint with id " + sprintid + " does not exist"));
 	 
-	 List <Object[]> tasks = TaskRepo.findTaskInfoBysprinttasks(sprint.getSprintId());
+	 List <Tasks> tasks = TaskRepo.findTaskInfoBysprinttasks(sprint.getSprintId());
 	 
 	return tasks;
 	}
@@ -65,10 +65,14 @@ public class TaskService {
 
 	@Transactional
 	public void updateTask(Long taskid, String taskTitle, String taskDiscription, Date startDate, Date endDate,
-			String taskStatus, Sprints sprintTasks) {
+			String taskStatus, Long sprint_id ) {
 		
 		Tasks task = TaskRepo.findById(taskid).orElseThrow(() -> new IllegalStateException("task with id " + taskid + " does not exist"));
 		
+		
+		if(sprint_id != null)
+		{
+		Sprints sprintTasks = SprintRepo.findById(sprint_id).get();
 		
 		
 		if(sprintTasks != null)
@@ -76,24 +80,43 @@ public class TaskService {
 		{
 			task.setSprintTasks(SprintRepo.findById(task.getSprintTasks().getSprintId()).orElseThrow(() -> new IllegalStateException("sprint with id " + task.getSprintTasks().getSprintId() + " does not exist")));
 		}
-		
-		
-		;
-		
+		}
 
 		if (taskTitle != null)
-			task.setTaskTitle(taskTitle);
+			task.settask_title(taskTitle);
 		if (taskDiscription != null)
-			task.setTaskDiscription(taskDiscription);
+			task.settask_description(taskDiscription);
 		if (startDate != null)
-			task.setStartDate(startDate);
+			task.setstartDate(startDate);
 
 		if (endDate != null)
-			task.setEndDate(endDate);
+			task.setendDate(endDate);
 		if (taskStatus != null)
-			task.setTaskStatus(taskStatus);
+			task.settaskStatus(taskStatus);
 		
 	}
+
+
+
+
+	public List<Tasks> getMytasks() {
+		
+		return TaskRepo.findAll();
+	}
+
+
+
+
+	public Tasks gettasks(Long taskId) {
+	
+		
+		return TaskRepo.findById(taskId).get();
+	}
+
+
+
+
+
 	
 	
 }

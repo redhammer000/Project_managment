@@ -64,7 +64,7 @@ public class ProjectController {
 		    auditLog.setCreatedAt(LocalDateTime.now());
 		    auditLog.setAction("CREATED");
 		    auditLog.setCreatedBy("some_user");
-		    auditLog.setEntityId(project.getProjectId());
+		    auditLog.setEntityId(project.getprojectId());
 		    auditLog.setEntityName("Project");
 		    auditLog.setFieldName("ALL");
 
@@ -74,9 +74,9 @@ public class ProjectController {
 		
 	}
 	
-	@DeleteMapping(path = "deleteproject/{projectid}")
+	@DeleteMapping(path = "deleteproject/{id}")
 	
-	public void deleteproject (@PathVariable ("projectid") Long projectid)
+	public void deleteproject (@PathVariable ("id") Long projectid)
 	{
 		ProjService.deleteProject(projectid);
 		AuditLog auditLog = new AuditLog();
@@ -91,10 +91,10 @@ public class ProjectController {
 	}
 	
 	
-	@PatchMapping(path = "update/{projectid}")
+	@PatchMapping(path = "update/{id}")
 	
 	public void updateProject(
-			@PathVariable ("projectid") Long projectid,
+			@PathVariable ("id") Long projectid,
 			@RequestParam (required = false) String projectName,
 			@RequestParam (required = false) String projectStatus,
 			@RequestParam (required = false) Date projectStartDate,
@@ -103,11 +103,11 @@ public class ProjectController {
 			@RequestParam (required = false) String description,
 			@RequestParam (required = false) String client,
 			@RequestParam (required = false)  String projectManager,
-			@RequestParam (required = false) Company companyProject
+			@RequestParam (required = false) Long branchNumber
 			)	 
 	{
 		
-		ProjService.UpdateProject(projectid,projectName,projectStatus,projectStartDate,projectEndDate,budget,description,client,projectManager,companyProject);
+		ProjService.UpdateProject(projectid,projectName,projectStatus,projectStartDate,projectEndDate,budget,description,client,projectManager,branchNumber);
 	
 		
 	}

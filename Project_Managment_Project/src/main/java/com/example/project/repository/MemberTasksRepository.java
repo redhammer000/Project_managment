@@ -13,9 +13,9 @@ import com.example.project.entity.MemberTask;
 @Repository
 public interface MemberTasksRepository extends JpaRepository<MemberTask, CompositeKey> {
 
-	@Query("SELECT tc.members.MemberId , tc.tasks.TaskId , tc.tasks.TaskTitle FROM MemberTask tc " +
+	@Query("SELECT tc FROM MemberTask tc " +
 	           "WHERE tc.members.MemberId = :memberId")
-	    List<Object[]> getTasksByMemberId(@Param("memberId") Long memberId);
+	    List<MemberTask> getTasksByMemberId(@Param("memberId") Long memberId);
 	
 	
 	

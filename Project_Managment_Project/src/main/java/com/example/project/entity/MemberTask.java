@@ -30,10 +30,20 @@ public class MemberTask{
 	    @JoinColumn(name = "MemberId")
 	    private Members members;
 
-		public MemberTask(CompositeKey compositeKey, Tasks tasks, Members members) {
+		public MemberTask(CompositeKey compositeKey, Long task_id, Long member_id) {
 			super();
 			this.compositeKey = compositeKey;
-			this.tasks = tasks;
+			
+			Tasks task = new Tasks();
+			
+			Members members = new Members();
+			
+			task.settaskId(task_id);
+			
+			members.setMemberId(member_id);
+			
+			
+			this.tasks = task;
 			this.members = members;
 		}
 

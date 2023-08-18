@@ -66,12 +66,11 @@ public class User {
 
 
 
-	public User(Long userId, String firstName, String lastName, String email, String phoneNumber, String position,
-			String address, String department, String gender, Boolean is_admin, Company companyUser) {
+	public User(Long userId, String first_name, String last_name, String email, String phoneNumber, String position,
+			String address, String department, String gender, Boolean is_admin, Long branchNumber) {
 		super();
-		UserId = userId;
-		FirstName = firstName;
-		LastName = lastName;
+		FirstName = first_name;
+		LastName = last_name;
 		this.email = email;
 		PhoneNumber = phoneNumber;
 		Position = position;
@@ -79,12 +78,24 @@ public class User {
 		Department = department;
 		Gender = gender;
 		Is_admin = is_admin;
+		Company companyUser = new Company();
+		
+		companyUser.setBranchNo(branchNumber);
+		CompanyUser = companyUser;
+	}
+	
+	public void setbranchNumber(Long branchNumber) {
+		Company companyUser = new Company();
+		companyUser.setBranchNo(branchNumber);
 		CompanyUser = companyUser;
 	}
 	
 	
+	public Long getbranchNumber() {
 	
-
+		return CompanyUser.getBranchNo();
+	}
+	
 	public Long getUserId() {
 		return UserId;
 	}
@@ -93,19 +104,19 @@ public class User {
 		UserId = userId;
 	}
 
-	public String getFirstName() {
+	public String getfirst_name() {
 		return FirstName;
 	}
 
-	public void setFirstName(String firstName) {
+	public void setfirst_name(String firstName) {
 		FirstName = firstName;
 	}
 
-	public String getLastName() {
+	public String getlast_name() {
 		return LastName;
 	}
 
-	public void setLastName(String lastName) {
+	public void setlast_name(String lastName) {
 		LastName = lastName;
 	}
 
@@ -149,11 +160,11 @@ public class User {
 		Department = department;
 	}
 
-	public String getGender() {
+	public String getgender() {
 		return Gender;
 	}
 
-	public void setGender(String gender) {
+	public void setgender(String gender) {
 		Gender = gender;
 	}
 

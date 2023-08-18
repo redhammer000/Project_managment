@@ -118,7 +118,7 @@ public class MemberService {
 
 
 
-	public List<Object[]> getTasksmember(Long memberid) {
+	public List<MemberTask> getTasksmember(Long memberid) {
 		
 		Members member = memberRepo.findById(memberid).orElseThrow(() -> new IllegalStateException("Member with id " + memberid + " does not exist"));
 		
@@ -136,9 +136,9 @@ public class MemberService {
 		
 		CompositeKey CompoKey = new CompositeKey();
 		
-		CompoKey.setMemberId(member.getMemberId());
+		CompoKey.setmember_id(member.getMemberId());
 		
-		CompoKey.setTaskId(task.getTaskId());
+		CompoKey.settask_id(task.gettaskId());
 		
 
 
@@ -151,6 +151,36 @@ public class MemberService {
 		
 		MemberTasksrepo.save(membertasks);
 		
+	}
+
+
+
+
+	public List<MemberTask> getTasksmemberwithmembers() {
+		
+		
+		return MemberTasksrepo.findAll();
+	}
+
+
+
+
+	public void My_delete_task(CompositeKey comp) {
+		
+		MemberTask memberT = MemberTasksrepo.findById(comp).get();
+		
+		MemberTasksrepo.delete(memberT);
+		
+	}
+
+
+
+
+	public List<MemberTask> getTasksUser(Long userId) {
+		
+		taskrepo.findByUserId(userId);
+		
+		return null;
 	}
 	
 	

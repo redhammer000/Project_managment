@@ -42,7 +42,7 @@ public class TaskCardService {
 
 	public void Register_TaskCard(TaskCards cards) {
 		
-		cards.setTaskForCards(tasksRepo.findById(cards.getTaskForCards().getTaskId()).orElseThrow(() -> new IllegalStateException("Task with id " + cards.getTaskForCards().getTaskId() + " does not exist")));
+		cards.setTaskForCards(tasksRepo.findById(cards.getTaskForCards().gettaskId()).orElseThrow(() -> new IllegalStateException("Task with id " + cards.getTaskForCards().gettaskId() + " does not exist")));
 		
 		TaskCardRepo.save(cards);
 		

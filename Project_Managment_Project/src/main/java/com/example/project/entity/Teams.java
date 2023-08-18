@@ -52,21 +52,34 @@ public class Teams {
 
 
 
-	public Teams(Long teamId, String teamName, String teamDiscription,
-			Project projTeam) {
+	public Teams(Long teamId, String team_name, String team_description,
+			Long project_id) {
 		super();
 		TeamId = teamId;
-		TeamName = teamName;
-		TeamDiscription = teamDiscription;
-		ProjTeam = projTeam;
+		TeamName = team_name;
+		TeamDiscription = team_description;
+		
+		Project proj = new Project();
+		
+		proj.setprojectId(project_id);
+		ProjTeam = proj;
 		this.MembersCount = 0;
 	}
 
 
 
+	
+	public void setproject_id(Long project_id )
+	{
+		Project proj = new Project();
+		proj.setprojectId(project_id);
+		ProjTeam = proj;
+	}
 
-
-
+	public Long getproject_id()
+	{
+		return ProjTeam.getprojectId();
+	}
 
 	public Long getTeamId() {
 		return TeamId;
@@ -88,7 +101,7 @@ public class Teams {
 
 
 
-	public String getTeamName() {
+	public String getteam_name() {
 		return TeamName;
 	}
 
@@ -98,7 +111,7 @@ public class Teams {
 
 
 
-	public void setTeamName(String teamName) {
+	public void setteam_name(String teamName) {
 		TeamName = teamName;
 	}
 
@@ -108,7 +121,7 @@ public class Teams {
 
 
 
-	public String getTeamDiscription() {
+	public String getteam_description() {
 		return TeamDiscription;
 	}
 
@@ -118,7 +131,7 @@ public class Teams {
 
 
 
-	public void setTeamDiscription(String teamDiscription) {
+	public void setteam_description(String teamDiscription) {
 		TeamDiscription = teamDiscription;
 	}
 
